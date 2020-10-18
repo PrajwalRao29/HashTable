@@ -27,7 +27,7 @@ public class MyLinkedList {
     public boolean search(String key) {
         MyNode temp = this.head;
         while (temp != null) {
-            if (temp.key.equalsIgnoreCase(key))
+            if (temp.key.hashCode()==key.hashCode())
                 return true;
             temp = temp.next;
         }
