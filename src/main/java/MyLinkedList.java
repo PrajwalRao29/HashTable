@@ -23,6 +23,21 @@ public class MyLinkedList {
             n = n.next;
         }
     }
+    public boolean delete(String data) {
+        if (!search(data)) {
+            return false;
+        }
+        MyNode temp = head;
+        while (temp.next.next!=null) {
+            if(temp.next.key.equalsIgnoreCase(data))
+            {
+                break;
+            }
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+        return true;
+    }
 
     public boolean search(String key) {
         MyNode temp = this.head;

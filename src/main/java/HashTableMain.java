@@ -33,5 +33,9 @@ public class HashTableMain {
         String words[] = s.split("\\s+");
         h.assignValue(words);
         h.l.print();
+        h.l.delete("or");
+        System.out.println("*****after deletion ******");
+       h.l.print();
+
     }
 }
