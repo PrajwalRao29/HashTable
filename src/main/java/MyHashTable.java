@@ -12,11 +12,36 @@ public class MyHashTable {
             bucketArray.add(null);
         }
     }
+    public boolean delete(String data) {
+        int index=getIndex(data);
+        MyLinkedList m=bucketArray.get(index);
+        if(!m.search(data))
+        {
+            return false;
+        }
+        if(m.head==null)
+            return false;
+        if(m.head.next==null)
+        {
+            m.head=null;
+            return true;
+        }
+        MyNode temp = m.head;
+        while (temp.next.next!=null) {
+            if(temp.next.key.equalsIgnoreCase(data))
+            {
+                break;
+            }
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+        return true;
+    }
+
 
     public void assignValue(String[] words) {
         for (String word : words) {
             int index=getIndex(word);
-            System.out.println(index);
             MyLinkedList m=bucketArray.get(index);
             if(m==null)
             {
@@ -41,13 +66,14 @@ public class MyHashTable {
             }
         }
     }
-    public int getIndex(String word)
+    public static int getIndex(String word)
     {
         int hashcode=Math.abs(word.hashCode());
         return hashcode%10;
     }
 
     public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
         MyHashTable h=new MyHashTable();
         String str="Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations";
         String[] words=str.split(" ");
@@ -58,6 +84,18 @@ public class MyHashTable {
             System.out.println("INDEX ="+index);
             if(b!=null)
             b.print();
+            else
+                System.out.println("THIS INDEX IS EMPTY");
+            index++;
+        }
+        h.delete("avoidable");
+        System.out.println("*********AFTER DELETION*********");
+        index=0;
+        for(MyLinkedList b:bucketArray)
+        {
+            System.out.println("INDEX ="+index);
+            if(b!=null)
+                b.print();
             else
                 System.out.println("THIS INDEX IS EMPTY");
             index++;

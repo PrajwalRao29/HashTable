@@ -23,26 +23,13 @@ public class MyLinkedList {
             n = n.next;
         }
     }
-    public boolean delete(String data) {
-        if (!search(data)) {
-            return false;
-        }
-        MyNode temp = head;
-        while (temp.next.next!=null) {
-            if(temp.next.key.equalsIgnoreCase(data))
-            {
-                break;
-            }
-            temp = temp.next;
-        }
-        temp.next = temp.next.next;
-        return true;
-    }
 
     public boolean search(String key) {
+        if(head==null)
+            return false;
         MyNode temp = this.head;
         while (temp != null) {
-            if (temp.key.hashCode()==key.hashCode())
+            if (temp.key.equals(key))
                 return true;
             temp = temp.next;
         }
